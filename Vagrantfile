@@ -5,10 +5,10 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  # Debian-based box
-  # https://vagrantcloud.com/box-cutter/debian76
-  # https://github.com/box-cutter/debian-vm
-  config.vm.box = "box-cutter/debian76"
+  # Ubuntu-based box
+  # https://vagrantcloud.com/box-cutter/ubuntu1404-docker
+  # https://github.com/box-cutter/ubuntu1404-docker
+  config.vm.box = "box-cutter/ubuntu1404-docker"
 
   # Create a private network, which allows host-only access
   # to the machine using a specific IP.
