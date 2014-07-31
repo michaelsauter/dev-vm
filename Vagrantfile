@@ -1,3 +1,6 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -35,16 +38,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     vb.customize ["modifyvm", :id, "--memory", 2048]
     vb.customize ["modifyvm", :id, "--cpus", cpus]
 
-    # Use host DNS resolver
+    # DNS settings
     # http://serverfault.com/questions/453185/vagrant-virtualbox-dns-10-0-2-3-not-working?rq=1
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-  end
-
-  # Fix SSH forwarding during provisioning
-  # https://github.com/mitchellh/vagrant/issues/1303
-  config.vm.provision :shell do |shell|
-    shell.inline = "touch $1 && chmod 0440 $1 && echo $2 > $1"
-    shell.args = %q{/etc/sudoers.d/root_ssh_agent "Defaults    env_keep += \"SSH_AUTH_SOCK\""}
   end
 
   # Basic provisioning
